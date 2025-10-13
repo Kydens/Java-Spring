@@ -3,12 +3,15 @@ package com.example.locationservice.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.locationservice.models.Department;
 import com.example.locationservice.models.Location;
 import com.example.locationservice.models.Office;
 import com.example.locationservice.models.DTO.OfficeDTO;
 import com.example.locationservice.repository.OfficeRepository;
 
+@Service
 public class OfficeService {
     private OfficeRepository officeRepository;
 
