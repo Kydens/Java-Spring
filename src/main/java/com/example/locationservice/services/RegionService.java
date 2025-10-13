@@ -2,6 +2,7 @@ package com.example.locationservice.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.locationservice.models.Region;
@@ -13,6 +14,7 @@ public class RegionService {
     private final RegionRepository regionRepository;
 
     // inject dependencies
+    @Autowired
     public RegionService(RegionRepository regionRepository) {
         this.regionRepository = regionRepository;
     }

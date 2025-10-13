@@ -2,19 +2,24 @@ package com.example.locationservice.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.locationservice.models.Country;
 import com.example.locationservice.models.Region;
 import com.example.locationservice.models.DTO.CountryDTO;
 import com.example.locationservice.repository.CountryRepository;
+import com.example.locationservice.repository.RegionRepository;
 
 @Service
 public class CountryService {
     private final CountryRepository countryRepository;
+    private final RegionRepository regionRepository;
 
-    public CountryService(CountryRepository countryRepository) {
+    @Autowired
+    public CountryService(CountryRepository countryRepository, RegionRepository regionRepository) {
         this.countryRepository = countryRepository;
+        this.regionRepository = regionRepository;
     }
 
     // find all country
@@ -34,7 +39,8 @@ public class CountryService {
         country.setCountry_id(countryDTO.getCountryId());
         country.setCountry_name(countryDTO.getCountryName());
         country.setCountry_code(countryDTO.getCountryCode());
-        country.setRegion(new Region(countryDTO.getRegionId()));
+        // country.setRegion(new Region(countryDTO.getRegionId()));
+        country.setRegion(regionRepository.findById(countryDTO.getRegionId()).orElse(null));
 
         countryRepository.save(country);
 

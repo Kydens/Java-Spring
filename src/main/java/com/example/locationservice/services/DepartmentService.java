@@ -2,6 +2,7 @@ package com.example.locationservice.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.locationservice.models.Department;
@@ -12,6 +13,7 @@ import com.example.locationservice.repository.DepartmentRepository;
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
 
+    @Autowired
     public DepartmentService(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
     }
