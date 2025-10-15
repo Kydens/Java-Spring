@@ -1,0 +1,41 @@
+<html>
+  <body>
+    <form
+      th:action="@{/location/save}"
+      th:object="${locationDTO}"
+      method="post"
+    >
+      <div>
+        <input th:field="*{locationId}" type="hidden" />
+      </div>
+      <div>
+        <label>Address</label>
+        <input th:field="*{address}" type="text" />
+      </div>
+      <div>
+        <label>Postal Code</label>
+        <input th:field="*{postalCode}" type="text" />
+      </div>
+      <div>
+        <label>City</label>
+        <input th:field="*{city}" type="text" />
+      </div>
+      <div>
+        <label>Province</label>
+        <input th:field="*{province}" type="text" />
+      </div>
+      <div>
+        <label>Country</label>
+        <select th:field="*{countryId}">
+          <option value="" selected>--Pilih Country--</option>
+          <option
+            th:each="country : ${countries}"
+            th:value="${country.countryId}"
+            th:text="${country.countryName}"
+          ></option>
+        </select>
+      </div>
+      <button type="submit">save</button>
+    </form>
+  </body>
+</html>

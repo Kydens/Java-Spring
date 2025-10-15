@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.locationservice.models.Country;
 import com.example.locationservice.models.Location;
 import com.example.locationservice.models.DTO.LocationDTO;
 import com.example.locationservice.repository.CountryRepository;
@@ -21,18 +20,22 @@ public class LocationService {
         this.locationRepository = locationRepository;
         this.countryRepository = countryRepository;
     }
-    public List<Location> getAll() {
-        return locationRepository.findAll();
+
+    public List<LocationDTO> getAll() {
+        return locationRepository.get();
     }
-    public Location getById(Integer id) {
-        return locationRepository.findById(id).orElse(null);
+
+    public LocationDTO getById(Integer id) {
+        return locationRepository.get(id);
     }
+
     public Boolean save(LocationDTO locationDTO) {
         Location location = new Location();
 
         location.setLocation_id(locationDTO.getLocationId());
         location.setAddress(locationDTO.getAddress());
         location.setPostal_code(locationDTO.getPostalCode());
+        location.setCity(locationDTO.getCity());
         location.setProvince(locationDTO.getProvince());
         // location.setCountry(new Country(locationDTO.getCountryId()));
         location.setCountry(countryRepository.findById(locationDTO.getCountryId()).orElse(null));
@@ -41,6 +44,7 @@ public class LocationService {
 
         return locationRepository.findById(location.getLocation_id()).isPresent();
     }
+
     public Boolean remove(Integer id) {
         locationRepository.deleteById(id);
         return !locationRepository.findById(id).isPresent();

@@ -25,8 +25,8 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
-    public Department getById(Integer id) {
-        return departmentRepository.findById(id).orElse(null);
+    public DepartmentDTO getById(Integer id) {
+        return departmentRepository.get(id);
     }
 
     public Boolean save(DepartmentDTO departmentDTO) {

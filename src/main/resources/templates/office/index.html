@@ -14,7 +14,7 @@
           <td th:text="${office.office_name}"></td>
           <td th:text="${office.location.address}"></td>
           <td>
-            <a th:href="@{office/edit/{id}(id = ${office.office_id})}">Edit</a>
+            <a th:href="@{office/form/{id}(id = ${office.office_id})}">Edit</a>
             <a th:href="@{/office/delete/{id}(id = ${office.office_id})}"
               >Delete</a
             >

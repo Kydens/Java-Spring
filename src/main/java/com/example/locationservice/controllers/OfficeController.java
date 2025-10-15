@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.locationservice.models.Location;
 import com.example.locationservice.models.Office;
+import com.example.locationservice.models.DTO.LocationDTO;
 import com.example.locationservice.models.DTO.OfficeDTO;
 import com.example.locationservice.services.LocationService;
 import com.example.locationservice.services.OfficeService;
@@ -34,23 +35,30 @@ public class OfficeController {
         return "office/index";
     }
 
-    @GetMapping("/edit/{id}")
-    public String get(@PathVariable("id") Integer id, Model model) {
-        List<Location> locations = locationService.getAll();
+    // @GetMapping("/edit/{id}")
+    // public String get(@PathVariable("id") Integer id, Model model) {
+    //     List<Location> locations = locationService.getAll();
 
-        Office officeTemp = officeService.getById(id);
-        OfficeDTO officeDTO = new OfficeDTO(officeTemp.getOffice_id(), officeTemp.getOffice_name(), officeTemp.getLocation().getLocation_id());
+    //     Office officeTemp = officeService.getById(id);
+    //     OfficeDTO officeDTO = new OfficeDTO(officeTemp.getOffice_id(), officeTemp.getOffice_name(), officeTemp.getLocation().getLocation_id());
 
-        model.addAttribute("officeDTO", officeDTO);
-        model.addAttribute("locations", locations);
-        return "office/edit";
-    }
+    //     model.addAttribute("officeDTO", officeDTO);
+    //     model.addAttribute("locations", locations);
+    //     return "office/edit";
+    // }
 
-    @GetMapping("form")
-    public String form(Model model) {
-        List<Location> locations = locationService.getAll();
+    @GetMapping(value = { "form", "form/{id}" })
+    public String form(Model model, @PathVariable(required = false) Integer id) {
+        List<LocationDTO> locations = locationService.getAll();
 
-        model.addAttribute("officeDTO", new OfficeDTO());
+        if (id != null) {
+            Office officeTemp = officeService.getById(id);
+            OfficeDTO officeDTO = new OfficeDTO(officeTemp.getOffice_id(), officeTemp.getOffice_name(), officeTemp.getLocation().getLocation_id());
+            model.addAttribute("officeDTO", officeDTO);
+        } else {
+            model.addAttribute("officeDTO", new OfficeDTO());
+        }
+
         model.addAttribute("locations", locations);
         return "office/form";
     }

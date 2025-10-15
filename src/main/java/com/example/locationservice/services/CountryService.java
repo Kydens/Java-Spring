@@ -22,13 +22,13 @@ public class CountryService {
     }
 
     // find all country
-    public List<Country> getAll() {
-        return countryRepository.findAll();
+    public List<CountryDTO> getAll() {
+        return countryRepository.get();
     }
 
     // find by id
-    public Country getById(Integer id) {
-        return countryRepository.findById(id).orElse(null);
+    public CountryDTO get(Integer id) {
+        return countryRepository.get(id);
     }
 
     // insert and update

@@ -1,0 +1,34 @@
+<html>
+  <body>
+    <a th:href="@{location/form}">Create Form</a>
+    <table>
+      <thead>
+        <th>No</th>
+        <th>Address</th>
+        <th>Postal Code</th>
+        <th>City</th>
+        <th>Province</th>
+        <th>Country</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr th:each="location, idx : ${locations}">
+          <td th:text="${idx.index+1}"></td>
+          <td th:text="${location.address}"></td>
+          <td th:text="${location.postalCode}"></td>
+          <td th:text="${location.city}"></td>
+          <td th:text="${location.province}"></td>
+          <td th:text="${location.countryName}"></td>
+          <td>
+            <a th:href="@{location/form/{id}(id = ${location.locationId})}"
+              >Edit</a
+            >
+            <a th:href="@{/location/delete/{id}(id = ${location.locationId})}"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

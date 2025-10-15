@@ -10,10 +10,10 @@
       <tbody>
         <tr th:each="region, idx : ${regions}">
           <td th:text="${idx.index+1}"></td>
-          <td th:text="${region.region_name}"></td>
+          <td th:text="${region.regionName}"></td>
           <td>
-            <a th:href="@{region/edit/{id}(id = ${region.region_id})}">Edit</a>
-            <a th:href="@{/region/delete/{id}(id = ${region.region_id})}"
+            <a th:href="@{region/form/{id}(id = ${region.regionId})}">Edit</a>
+            <a th:href="@{/region/delete/{id}(id = ${region.regionId})}"
               >Delete</a
             >
           </td>

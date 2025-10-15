@@ -11,13 +11,14 @@
       <tbody>
         <tr th:each="country, idx : ${countries}">
           <td th:text="${idx.index+1}"></td>
-          <td th:text="${country.country_name}"></td>
-          <td th:text="${country.region.region_name}"></td>
+          <td th:text="${country.countryName}"></td>
+          <td th:text="${country.countryCode}"></td>
+          <td th:text="${country.regionName}"></td>
           <td>
-            <a th:href="@{country/edit/{id}(id = ${country.country_id})}"
+            <a th:href="@{country/form/{id}(id = ${country.countryId})}"
               >Edit</a
             >
-            <a th:href="@{/country/delete/{id}(id = ${country.country_id})}"
+            <a th:href="@{/country/delete/{id}(id = ${country.countryId})}"
               >Delete</a
             >
           </td>

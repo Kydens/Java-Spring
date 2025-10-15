@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.locationservice.models.Country;
 import com.example.locationservice.models.Region;
 import com.example.locationservice.models.DTO.CountryDTO;
+import com.example.locationservice.models.DTO.RegionDTO;
 import com.example.locationservice.services.CountryService;
 import com.example.locationservice.services.RegionService;
 
@@ -34,24 +34,16 @@ public class CountryController {
         return "country/index";
     }
 
-    @GetMapping("/edit/{id}")
-    public String get(@PathVariable("id") Integer id, Model model) {
-        List<Region> regions = regionService.getAll();
+    @GetMapping(value = {"form", "form/{id}"})
+    public String form(Model model, @PathVariable(required = false) Integer id) {
+        List<RegionDTO> regions = regionService.getAll();
 
-        Country countryTemp = countryService.getById(id);
-        CountryDTO countryDTO = new CountryDTO(countryTemp.getCountry_id(), countryTemp.getCountry_name(), countryTemp.getCountry_code(),countryTemp.getRegion().getRegion_id());
+        if (id != null) {
+            model.addAttribute("countryDTO",  countryService.get(id));
+        } else {  
+            model.addAttribute("countryDTO", new CountryDTO());
+        }
 
-        
-        model.addAttribute("countryDTO", countryDTO);
-        model.addAttribute("regions", regions);
-        return "country/edit";
-    }
-
-    @GetMapping("form")
-    public String form(Model model) {
-        List<Region> regions = regionService.getAll();
-
-        model.addAttribute("countryDTO", new CountryDTO());
         model.addAttribute("regions", regions);
         return "country/form";
     }
@@ -63,7 +55,7 @@ public class CountryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(Integer id) {
+    public String delete(@PathVariable("id") Integer id) {
         Boolean result = countryService.remove(id);
         return (result) ?  "redirect:/country" : "country/index";
     }

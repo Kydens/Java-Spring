@@ -28,17 +28,16 @@ public class RegionController {
         return "region/index";
     }
 
-    @GetMapping("/edit/{id}")
-    public String get(@PathVariable("id") Integer id, Model model) {
-        Region regionTemp = regionService.getById(id);
-        RegionDTO regionDTO = new RegionDTO(regionTemp.getRegion_id(), regionTemp.getRegion_name());
-        model.addAttribute("regionDTO", regionDTO);
-        return "region/edit";
-    }
+    @GetMapping(value = {"form", "form/{id}"})
+    public String form(Model model, @PathVariable(required = false) Integer id) {
 
-    @GetMapping("form")
-    public String form(Model model) {
-        model.addAttribute("regionDTO", new RegionDTO());
+        if (id != null) {
+            RegionDTO regionDTO = regionService.getById(id);
+            model.addAttribute("regionDTO", regionDTO);
+        } else {
+            model.addAttribute("regionDTO", new RegionDTO());
+        }
+        
         return "region/form";
     }
 

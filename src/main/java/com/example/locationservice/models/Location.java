@@ -19,15 +19,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Location {
-    public Location(int location_id) {
+    public Location(Integer location_id) {
         this.location_id = location_id;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int location_id;
+    private Integer location_id;
     private String address;
-    private int postal_code;
+    private Integer postal_code;
     private String city;
     private String province;
 

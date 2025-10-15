@@ -2,8 +2,15 @@
   <body>
     <form th:action="@{/country/save}" th:object="${countryDTO}" method="post">
       <div>
+        <input th:field="*{countryId}" type="hidden" />
+      </div>
+      <div>
         <label>Name</label>
         <input th:field="*{countryName}" type="text" />
+      </div>
+      <div>
+        <label>Code</label>
+        <input th:field="*{countryCode}" type="text" />
       </div>
       <div>
         <label>Region</label>

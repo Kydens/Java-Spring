@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.locationservice.models.Department;
+import com.example.locationservice.models.Location;
 import com.example.locationservice.models.Office;
 import com.example.locationservice.models.DTO.DepartmentDTO;
+import com.example.locationservice.models.DTO.OfficeDTO;
 import com.example.locationservice.services.DepartmentService;
 import com.example.locationservice.services.OfficeService;
 
@@ -45,23 +47,17 @@ public class DepartmentController {
         return "department/index";
     }
 
-    @GetMapping("/edit/{id}")
-    public String get(@PathVariable("id") Integer id, Model model) {
+    @GetMapping(value = { "form", "form/{id}" })
+    public String form(Model model, @PathVariable(required = false) Integer id) {
         List<Office> offices = officeService.getAll();
 
-        Department departmentTemp = departmentService.getById(id);
-        DepartmentDTO departmentDTO = new DepartmentDTO(departmentTemp.getDepartment_id(), departmentTemp.getDepartment_name(), departmentTemp.getOffice().getOffice_id());
+        if (id != null) {
+            DepartmentDTO departmentDTO = departmentService.getById(id);
+            model.addAttribute("departmentDTO", departmentDTO);
+        } else {
+            model.addAttribute("departmentDTO", new DepartmentDTO());
+        }
 
-        model.addAttribute("departmentDTO", departmentDTO);
-        model.addAttribute("offices", offices);
-        return "department/edit";
-    }
-
-    @GetMapping("form")
-    public String form(Model model) {
-        List<Office> offices = officeService.getAll();
-
-        model.addAttribute("departmentDTO", new DepartmentDTO());
         model.addAttribute("offices", offices);
         return "department/form";
     }

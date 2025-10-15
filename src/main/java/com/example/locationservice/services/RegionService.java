@@ -20,13 +20,13 @@ public class RegionService {
     }
 
     // find all region
-    public List<Region> getAll() {
-        return regionRepository.findAll();
+    public List<RegionDTO> getAll() {
+        return regionRepository.get();
     }
 
     // find by id
-    public Region getById(Integer id) {
-        return regionRepository.findById(id).orElse(null);
+    public RegionDTO getById(Integer id) {
+        return regionRepository.get(id);
     }
 
     // insert and update
