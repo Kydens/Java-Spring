@@ -1,0 +1,24 @@
+<html>
+  <body>
+    <a th:href="@{region/form}">Create Form</a>
+    <table>
+      <thead>
+        <th>No</th>
+        <th>Name</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr th:each="region, idx : ${regions}">
+          <td th:text="${idx.index+1}"></td>
+          <td th:text="${region.region_name}"></td>
+          <td>
+            <a th:href="@{region/edit/{id}(id = ${region.region_id})}">Edit</a>
+            <a th:href="@{/region/delete/{id}(id = ${region.region_id})}"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

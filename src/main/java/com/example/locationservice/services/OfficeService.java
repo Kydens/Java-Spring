@@ -1,13 +1,10 @@
 package com.example.locationservice.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.locationservice.models.Department;
-import com.example.locationservice.models.Location;
 import com.example.locationservice.models.Office;
 import com.example.locationservice.models.DTO.OfficeDTO;
 import com.example.locationservice.repository.DepartmentRepository;
@@ -17,12 +14,14 @@ import com.example.locationservice.repository.OfficeRepository;
 @Service
 public class OfficeService {
     private OfficeRepository officeRepository;
-    private DepartmentRepository departmentRepository;
     private LocationRepository locationRepository;
+    private DepartmentRepository departmentRepository;
 
     @Autowired
-    public OfficeService(OfficeRepository officeRepository) {
+    public OfficeService(OfficeRepository officeRepository, DepartmentRepository departmentRepository, LocationRepository locationRepository) {
         this.officeRepository = officeRepository;
+        this.departmentRepository = departmentRepository;
+        this.locationRepository = locationRepository;
     }
 
     public List<Office> getAll() {
@@ -36,14 +35,9 @@ public class OfficeService {
     public Boolean save(OfficeDTO officeDTO) {
         Office office = new Office();
         
-        office.setOffice_id(officeDTO.getOffice_id());
-        office.setOffice_name(officeDTO.getOffice_name());
-
-        List<Department> department = new ArrayList<>();
-        department.add(departmentRepository.findById(officeDTO.getDepartment_id()).orElse(null));
-        office.setDepartments(department);
-
-        office.setLocation(locationRepository.findById(officeDTO.getLocation_id()).orElse(null));
+        office.setOffice_id(officeDTO.getOfficeId());
+        office.setOffice_name(officeDTO.getOfficeName());   
+        office.setLocation(locationRepository.findById(officeDTO.getLocationId()).orElse(null));
 
         officeRepository.save(office);
 
@@ -51,6 +45,7 @@ public class OfficeService {
     }
 
     public Boolean remove(Integer id) {
+        departmentRepository.deleteByOfficeId(id);
         officeRepository.deleteById(id);
         return !officeRepository.findById(id).isPresent();
     }

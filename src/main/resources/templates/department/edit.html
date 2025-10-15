@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <a th:href="@{/department}">Back</a>
+    <form
+      th:action="@{/department/save}"
+      th:object="${departmentDTO}"
+      method="post"
+    >
+      <div>
+        <input th:field="*{departmentId}" type="hidden" />
+      </div>
+      <div>
+        <label>Name</label>
+        <input th:field="*{departmentName}" type="text" />
+      </div>
+      <div>
+        <label>Office</label>
+        <select th:field="*{officeId}">
+          <option value="" selected>--Pilih Office--</option>
+          <option
+            th:each="office : ${offices}"
+            th:value="${office.office_id}"
+            th:text="${office.office_name}"
+          ></option>
+        </select>
+      </div>
+      <button type="submit">save</button>
+    </form>
+  </body>
+</html>

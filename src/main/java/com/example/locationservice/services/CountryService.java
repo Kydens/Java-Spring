@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.locationservice.models.Country;
-import com.example.locationservice.models.Region;
 import com.example.locationservice.models.DTO.CountryDTO;
 import com.example.locationservice.repository.CountryRepository;
 import com.example.locationservice.repository.RegionRepository;

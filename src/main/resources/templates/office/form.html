@@ -1,0 +1,22 @@
+<html>
+  <body>
+    <form th:action="@{/office/save}" th:object="${officeDTO}" method="post">
+      <div>
+        <label>Name</label>
+        <input th:field="*{officeName}" type="text" />
+      </div>
+      <div>
+        <label>location</label>
+        <select th:field="*{locationId}">
+          <option value="" selected>--Pilih Office--</option>
+          <option
+            th:each="location : ${locations}"
+            th:value="${location.location_id}"
+            th:text="${location.address}"
+          ></option>
+        </select>
+      </div>
+      <button type="submit">save</button>
+    </form>
+  </body>
+</html>

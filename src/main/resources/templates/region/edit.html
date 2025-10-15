@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <a th:href="@{/region}">Back</a>
+    <form th:action="@{/region/save}" th:object="${regionDTO}" method="post">
+      <div>
+        <input th:field="*{regionId}" type="hidden" />
+      </div>
+      <div>
+        <label>Name</label>
+        <input th:field="*{regionName}" type="text" />
+      </div>
+      <button type="submit">save</button>
+    </form>
+  </body>
+</html>

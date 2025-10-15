@@ -8,14 +8,17 @@ import org.springframework.stereotype.Service;
 import com.example.locationservice.models.Department;
 import com.example.locationservice.models.DTO.DepartmentDTO;
 import com.example.locationservice.repository.DepartmentRepository;
+import com.example.locationservice.repository.OfficeRepository;
 
 @Service
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
+    private final OfficeRepository officeRepository;
 
     @Autowired
-    public DepartmentService(DepartmentRepository departmentRepository) {
+    public DepartmentService(DepartmentRepository departmentRepository, OfficeRepository officeRepository) {
         this.departmentRepository = departmentRepository;
+        this.officeRepository = officeRepository;
     }
 
     public List<Department> getAll() {
@@ -31,6 +34,7 @@ public class DepartmentService {
 
         department.setDepartment_id(departmentDTO.getDepartmentId());
         department.setDepartment_name(departmentDTO.getDepartmentName());
+        department.setOffice(officeRepository.findById(departmentDTO.getOfficeId()).orElse(null));
 
         departmentRepository.save(department);
 

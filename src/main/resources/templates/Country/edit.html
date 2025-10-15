@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <a th:href="@{/country}">Back</a>
+    <form th:action="@{/country/save}" th:object="${countryDTO}" method="post">
+      <div>
+        <input th:field="*{countryId}" type="hidden" />
+      </div>
+      <div>
+        <label>Name</label>
+        <input th:field="*{countryName}" type="text" />
+      </div>
+      <div>
+        <label>Region</label>
+        <select th:field="*{regionId}">
+          <option value="" selected>--Pilih Region--</option>
+          <option
+            th:each="region : ${regions}"
+            th:value="${region.region_id}"
+            th:text="${region.region_name}"
+          ></option>
+        </select>
+      </div>
+      <button type="submit">save</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <a th:href="@{office/form}">Create Form</a>
+    <table>
+      <thead>
+        <th>No</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr th:each="office, idx : ${offices}">
+          <td th:text="${idx.index+1}"></td>
+          <td th:text="${office.office_name}"></td>
+          <td th:text="${office.location.address}"></td>
+          <td>
+            <a th:href="@{office/edit/{id}(id = ${office.office_id})}">Edit</a>
+            <a th:href="@{/office/delete/{id}(id = ${office.office_id})}"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,7 +1,6 @@
 package com.example.locationservice.models;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

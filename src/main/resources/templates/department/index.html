@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <a th:href="@{department/form}">Create Form</a>
+    <table>
+      <thead>
+        <th>No</th>
+        <th>Name</th>
+        <th>Office</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr th:each="department, idx : ${departments}">
+          <td th:text="${idx.index+1}"></td>
+          <td th:text="${department.department_name}"></td>
+          <td th:text="${department.office.office_name}"></td>
+          <td>
+            <a
+              th:href="@{department/edit/{id}(id = ${department.department_id})}"
+              >Edit</a
+            >
+            <a
+              th:href="@{/department/delete/{id}(id = ${department.department_id})}"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
