@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.locationservice.models.Location;
 import com.example.locationservice.models.DTO.CountryDTO;
 import com.example.locationservice.models.DTO.LocationDTO;
 import com.example.locationservice.services.CountryService;
@@ -18,12 +17,12 @@ import com.example.locationservice.services.LocationService;
 
 @Controller
 @RequestMapping("location")
-public class locationController {
+public class LocationController {
     private LocationService locationService;
     private CountryService countryService;
 
     @Autowired
-    public locationController(LocationService locationService, CountryService countryService) {
+    public LocationController(LocationService locationService, CountryService countryService) {
         this.locationService = locationService;
         this.countryService = countryService;
     }

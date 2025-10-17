@@ -2,6 +2,9 @@
   <body>
     <form th:action="@{/region/save}" th:object="${regionDTO}" method="post">
       <div>
+        <input th:field="*{regionId}" type="hidden" />
+      </div>
+      <div>
         <label>Name</label>
         <input th:field="*{regionName}" type="text" />
       </div>
